@@ -1,0 +1,36 @@
+# Contributor: Niklas Hallqvist <niklas@appli.se>
+# Maintainer: Niklas Hallqvist <niklas@appli.se>
+pkgname="dump"
+pkgver="0.4b46"
+pkgrel=0
+pkgdesc="BSD dump/restore"
+url="http://dump.sourceforge.net/"
+arch="all"
+license="BSD"
+depends=""
+makedepends=""
+install=""
+subpackages="$pkgname-dev $pkgname-doc"
+source="http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz"
+builddir="$srcdir/$pkgname-$pkgver"
+
+build() {
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var
+	make
+}
+
+check() {
+	make check
+}
+
+package() {
+	make DESTDIR="$pkgdir" install
+}
+
+sha512sums="a30e72ab6c4d18497dffe3d25634c2e55ca90861d1cd8a6c0fd44709e735a217dbf4cdabb8c80e02053def94d9a22cf1d685ee0d0f24f5b748ee5f0de19cf17d  dump-0.4b46.tar.gz"
