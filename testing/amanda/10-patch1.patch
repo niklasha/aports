@@ -1,0 +1,18 @@
+--- src/amanda-3.5.1/common-src/security-util.c.orig
++++ src/amanda-3.5.1/common-src/security-util.c
+@@ -2702,6 +2702,7 @@
+     return result;
+ }
+ 
++#ifndef USE_AMANDAHOSTS
+ /*
+  * See if a remote user is allowed in.  This version uses ruserok()
+  * and friends.
+@@ -2843,6 +2844,7 @@
+ 
+     return result;
+ }
++#endif
+ 
+ /*
+  * Check to see if a user is allowed in.  This version uses .amandahosts

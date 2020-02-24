@@ -1,0 +1,45 @@
+# Contributor: Niklas Hallqvist <niklas@appli.se>
+# Maintainer: Niklas Hallqvist <niklas@appli.se>
+# Maintainer:
+pkgname="amanda"
+pkgver="3.5.1"
+pkgrel=0
+pkgdesc="Amanda, The Advanced Maryland Automatic Network Disk Archiver"
+url="http://www.amanda.org/"
+arch="all"
+license="BSD"
+depends="bash gettext perl glib"
+makedepends="perl-dev pkgconfig glib-dev"
+install=""
+subpackages="$pkgname-dev $pkgname-doc"
+source="http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz
+	10-patch1.patch
+	20-patch2.patch"
+patch_args="-p2"
+builddir="$srcdir/$pkgname-$pkgver"
+
+build() {
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var \
+		--without-ndmp \
+		--without-amperldir
+	make
+}
+
+check() {
+#	make check
+	:
+}
+
+package() {
+	make DESTDIR="$pkgdir" install
+}
+
+sha512sums="8d5451b6b3f18f9a705592ba6baf8ffb7fb4fe62261eac8a4f4fae4eded3f7f447f547ac6f016bcb57ea43f116cf87fdc48f8e77b117bbdecf00d3e37dd0f39f  amanda-3.5.1.tar.gz
+2ffb659b2e5b3ac54d1b6c0fdf90bdb874e132ad3d9f5dfa81196e30b40c1ef124be7066e6ef41e19be71306c0c78e714cf9beb43f15befce3b8f45a651f9e45  10-patch1.patch
+3fcc545402279ff8daebf90272086b20034cfaf4b9c15921d9bf8b636a55232818ed0a0cad40dce70c02e1d48f0defbaf40e07aae68babfae88ed65e28ff1912  20-patch2.patch"

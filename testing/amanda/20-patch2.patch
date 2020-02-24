@@ -1,0 +1,11 @@
+--- src/amanda-3.5.1/gnulib/Makefile.in.orig
++++ src/amanda-3.5.1/gnulib/Makefile.in
+@@ -2243,7 +2243,7 @@
+ # avoid installing it.
+ 
+ all-local: charset.alias ref-add.sed ref-del.sed
+-install-exec-local: install-exec-localcharset
++install-exec-local: 
+ install-exec-localcharset: all-local
+ 	if test $(GLIBC21) = no; then \
+ 	  case '$(host_os)' in \
